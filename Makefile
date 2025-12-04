@@ -1,14 +1,12 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g
-
-# Final program name
+CFLAGS = -Wall -Wextra -O2
+OBJ = main.o functions.o
 TARGET = twixt
 
-# Object files
-OBJ = main.o functions.o
+all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJ)
 
 main.o: main.c functions.h
 	$(CC) $(CFLAGS) -c main.c
@@ -17,4 +15,7 @@ functions.o: functions.c functions.h
 	$(CC) $(CFLAGS) -c functions.c
 
 clean:
-	rm -f *.o $(TARGET)
+	rm -f $(OBJ) $(TARGET)
+
+run: $(TARGET)
+	./$(TARGET)
